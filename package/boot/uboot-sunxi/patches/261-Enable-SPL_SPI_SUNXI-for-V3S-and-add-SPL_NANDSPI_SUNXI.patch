@@ -1,0 +1,48 @@
+--- a/arch/arm/mach-sunxi/Makefile
++++ b/arch/arm/mach-sunxi/Makefile
+@@ -36,6 +36,7 @@ obj-$(CONFIG_DRAM_SUN8I_A33)	+= dram_sun
+ obj-$(CONFIG_DRAM_SUN8I_A83T)	+= dram_sun8i_a83t.o
+ obj-$(CONFIG_DRAM_SUN9I)	+= dram_sun9i.o
+ obj-$(CONFIG_SPL_SPI_SUNXI)	+= spl_spi_sunxi.o
++obj-$(CONFIG_SPL_SPINAND_SUNXI)	+= spl_spinand_sunxi.o
+ obj-$(CONFIG_SUNXI_DRAM_DW)	+= dram_sunxi_dw.o
+ obj-$(CONFIG_SUNXI_DRAM_DW)	+= dram_timings/
+ obj-$(CONFIG_DRAM_SUN50I_H6)	+= dram_sun50i_h6.o
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -1056,13 +1056,31 @@ config SPL_STACK_R_ADDR
+ 	default 0x4fe00000 if SUN50I_GEN_H6
+ 
+ config SPL_SPI_SUNXI
+-	bool "Support for SPI Flash on Allwinner SoCs in SPL"
+-	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_R40 || MACH_SUN50I_H6
++	bool "Support for SPI-NOR Flash on Allwinner SoCs in SPL"
++	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_R40 || MACH_SUN50I_H6 || MACH_SUN8I_V3S
++	default n
+ 	help
+-	  Enable support for SPI Flash. This option allows SPL to read from
+-	  sunxi SPI Flash. It uses the same method as the boot ROM, so does
++	  Enable support for SPI-NOR Flash. This option allows SPL to read from
++	  sunxi SPI-NOR Flash. It uses the same method as the boot ROM, so does
+ 	  not need any extra configuration.
+ 
++config SPL_SPINAND_SUNXI
++	bool "Support for SPI-NAND Flash on Allwinner SoCs in SPL"
++	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_R40 || MACH_SUN50I_H6 || MACH_SUN8I_V3S
++	default n
++	help
++	  Enable support for SPI-NAND Flash. This option allows SPL to read from
++	  sunxi SPI-NAND Flash. It uses the same method as the boot ROM, so does
++	  not need any extra configuration.
++
++config SPL_SPINAND_SUNXI_SPL_USE_GENERIC2K_ON_UNKNOWN
++	bool "Generic SPI-NAND config with 2K page-size"
++	depends on SPL_SPINAND_SUNXI
++	default n
++	help
++	  If no known spi-nand is found, try with generic settings for spi-nand with a
++	  page-size of 2K.
++
+ config PINE64_DT_SELECTION
+ 	bool "Enable Pine64 device tree selection code"
+ 	depends on MACH_SUN50I

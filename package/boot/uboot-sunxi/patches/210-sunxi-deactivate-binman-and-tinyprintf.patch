@@ -1,0 +1,30 @@
+From def280c4792262a368c8861312dc6b376181021f Mon Sep 17 00:00:00 2001
+From: Hauke Mehrtens <hauke@hauke-m.de>
+Date: Mon, 1 Jan 2018 23:10:56 +0100
+Subject: sunxi: deactivate binman
+
+Use the old way to generate the images instead of binman.
+binman needs python with swig to avoid this host tool dependency use the
+old way of generating images.
+---
+ Makefile | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -991,7 +991,6 @@ config ARCH_SOCFPGA
+ 
+ config ARCH_SUNXI
+ 	bool "Support sunxi (Allwinner) SoCs"
+-	select BINMAN
+ 	select CMD_GPIO
+ 	select CMD_MMC if MMC
+ 	select CMD_USB if DISTRO_DEFAULTS && USB_HOST
+@@ -1017,7 +1016,6 @@ config ARCH_SUNXI
+ 	select USB if DISTRO_DEFAULTS
+ 	select USB_KEYBOARD if DISTRO_DEFAULTS && USB_HOST
+ 	select USB_STORAGE if DISTRO_DEFAULTS && USB_HOST
+-	select SPL_USE_TINY_PRINTF
+ 	select USE_PREBOOT
+ 	select SYS_RELOC_GD_ENV_ADDR
+ 	imply BOARD_LATE_INIT

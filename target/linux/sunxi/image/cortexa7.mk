@@ -231,3 +231,12 @@ define Device/xunlong_orangepi-2
   SOC := sun8i-h3
 endef
 TARGET_DEVICES += xunlong_orangepi-2
+
+define Device/licheepi-zero
+  DEVICE_VENDOR := LicheePi
+  DEVICE_MODEL := Zero
+  DEVICE_PACKAGES:=kmod-rtl8723bs rtl8723bs-firmware
+  SOC := sun8i-v3s
+  SUPPORTED_DEVICES:=licheepi,licheepi-zero
+endef
+TARGET_DEVICES += licheepi-zero

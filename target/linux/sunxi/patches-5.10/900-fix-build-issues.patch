@@ -1,0 +1,21 @@
+--- a/drivers/staging/rtl8723bs/Kconfig
++++ b/drivers/staging/rtl8723bs/Kconfig
+@@ -2,7 +2,6 @@
+ config RTL8723BS
+ 	tristate "Realtek RTL8723BS SDIO Wireless LAN NIC driver"
+ 	depends on WLAN && MMC && CFG80211
+-	depends on m
+ 	select WIRELESS_EXT
+ 	select WEXT_PRIV
+ 	help
+--- a/scripts/Makefile
++++ b/scripts/Makefile
+@@ -21,7 +21,7 @@ HOSTCFLAGS_asn1_compiler.o = -I$(srctree
+ HOSTCFLAGS_sign-file.o = $(CRYPTO_CFLAGS)
+ HOSTLDLIBS_sign-file = $(CRYPTO_LIBS)
+ HOSTCFLAGS_extract-cert.o = $(CRYPTO_CFLAGS)
+-HOSTLDLIBS_extract-cert = $(CRYPTO_LIBS)
++HOSTLDLIBS_extract-cert = $(CRYPTO_LIBS) -lpthread
+ 
+ ifdef CONFIG_UNWINDER_ORC
+ ifeq ($(ARCH),x86_64)

@@ -1,0 +1,102 @@
+CONFIG_SPL=y
+CONFIG_ARM=y
+CONFIG_SYS_CLK_FREQ=1200000000
+CONFIG_ARCH_SUNXI=y
+CONFIG_MACH_SUN8I_V3S=y
+CONFIG_DRAM_CLK=360
+CONFIG_DEFAULT_DEVICE_TREE="sun8i-v3s-licheepi-zero-spinand"
+CONFIG_SPL_STACK_R_ADDR=0x43e00000
+CONFIG_PRE_CON_BUF_ADDR=0x43020000
+
+## USB
+CONFIG_USB0_ID_DET="PF6"
+CONFIG_PHY_SUN4I_USB=y
+# CONFIG_USB_EHCI_HCD=y
+# CONFIG_USB_OHCI_HCD=y
+CONFIG_USB=y
+CONFIG_DM_USB=y
+CONFIG_USB_MUSB_HOST=y
+
+## Network
+CONFIG_CMD_MDIO=y
+CONFIG_PHYLIB=y
+CONFIG_PHY_ADDR_ENABLE=y
+CONFIG_DM_ETH=y
+CONFIG_DM_MDIO=y
+CONFIG_DM_MDIO_MUX=y
+CONFIG_NETDEVICES=y
+CONFIG_MII=y
+CONFIG_SUN8I_EMAC=y
+
+## SPI
+## These are the standard spi boot handling, which is NOT done, since the custom spinand method is used.
+# CONFIG_SPI_BOOT=y
+# CONFIG_SPL_SPI_SUPPORT=y
+# CONFIG_SPL_SPI_SUNXI=y
+##
+## NOR
+## These are poorly named generic sounding options that are actually for NOR flash only.
+# CONFIG_SPI_FLASH=y
+# CONFIG_DM_SPI_FLASH=y
+# CONFIG_SPI_FLASH_MTD=y
+# CONFIG_SF_DEFAULT_SPEED=24000000
+# CONFIG_CMD_SF=y
+##
+
+CONFIG_SPI=y
+CONFIG_SPI_SUNXI=y
+CONFIG_SPL_SPINAND_SUNXI=y
+# CONFIG_SPL_SPINAND_SUNXI_SPL_USE_GENERIC2K_ON_UNKNOWN=y
+CONFIG_DM=y
+CONFIG_DM_SPI=y
+CONFIG_DM_MTD=y
+CONFIG_MTD=y
+CONFIG_MTD_SPI_NAND=y
+CONFIG_CMD_DM=y
+CONFIG_CMD_SPI=y
+CONFIG_CMD_MTD=y
+
+## UBI
+CONFIG_MTD_UBI=y
+CONFIG_MTD_UBI_FASTMAP=y
+CONFIG_MTD_UBI_FASTMAP_AUTOCONVERT=1
+CONFIG_CMD_UBI=y
+CONFIG_CMD_UBIFS=y
+CONFIG_RBTREE=y
+CONFIG_MTD_DEVICE=y
+CONFIG_MTD_PARTITIONS=y
+CONFIG_CMD_MTDPARTS=y
+CONFIG_LZO=y
+CONFIG_LZMA=y
+
+## ENV
+CONFIG_ENV_IS_NOWHERE=y
+CONFIG_ENV_IS_IN_FAT=n
+# CONFIG_ENV_IS_IN_UBI=n
+# CONFIG_ENV_UBI_PART="ubi0"
+# CONFIG_ENV_UBI_VOLUME="ubootenv"
+# CONFIG_ENV_UBI_VOLUME_REDUND="ubootenv2"
+## A handy option would be to reset and save the default env: "ubifsload 0x43000000 reset_env && env default -a && saveenv;"
+## Although currently there is no custom environment use cases so it always loads the default.
+#
+## Would be useful to override the boot procedure when needed. Compile a list useful environment variables for special boot procedures.
+## Network booting and usb booting would be possible. Good for reflashing in case of failure.
+# CONFIG_PREBOOT="usb start && fatload usb 0 0x43000000 uEnv.txt && env import -t ${fileaddr} ${filesize}"
+#
+
+## BOOT
+CONFIG_MTDIDS_DEFAULT="spi-nand0=0"
+CONFIG_MTDPARTS_DEFAULT="mtdparts=0:2M(boot),-(ubi0)"
+# CONFIG_MTDPARTS_DEFAULT="mtdparts=0:3M(boot),-(ubi0)"
+CONFIG_BOOTCOMMAND="ubifsmount ubi0:kernel; ubifsload $kernel_addr_r uImage; ubifsload $fdt_addr_r dtb; bootm 0x41000000 - 0x41800000"
+CONFIG_USE_BOOTARGS=y
+CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk panic=5 rootwait ubi.mtd=1,2048 rootfstype=ubifs root=ubi0:rootfs rw"
+
+## DEBUG
+# CONFIG_LOGLEVEL=7
+# CONFIG_SHOW_ERRORS=y
+# CONFIG_SPL_LOGLEVEL=7
+# CONFIG_SPL_SHOW_ERRORS=y
+# CONFIG_SPL_USE_TINY_PRINTF=n
+# CONFIG_HEXDUMP=y
+# CONFIG_SPL_HEXDUMP=y
