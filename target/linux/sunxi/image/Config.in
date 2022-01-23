@@ -33,6 +33,10 @@ config SUN8I_V3S_OFFSET_UBI
 	default 3145728 if SUNXI_SPINAND_PAGESIZE = 2048 && SUN8I_V3S_SPINAND_DUPLICATE_BOOT && SUN8I_V3S_SPINAND_DUPLICATE_BOOT_UBOOT > 2
 	default 2097152 if SUNXI_SPINAND_PAGESIZE = 2048 && SUN8I_V3S_SPINAND_DUPLICATE_BOOT
 	default 1048576 if SUNXI_SPINAND_PAGESIZE = 2048
+	help 
+	  This value must be greater than the total size of the SPL and u-boot copies.
+	  When changing be sure to sync the values used in the u-boot board defconfig
+	  (CONFIG_MTDPARTS_DEFAULT), and the u-boot device tree spi-nand flash node.
 
 menuconfig SUN8I_V3S_SPINAND_DUPLICATE_BOOT
 	bool "Duplicate SPL and u-boot for better fail-safety"
