@@ -8,7 +8,7 @@ ARCH:=arm
 BOARD:=sunxi
 BOARDNAME:=Allwinner A1x/A20/A3x/H3/H5/R40/V3s
 FEATURES:=fpu usb ext4 display rootfs-part rtc squashfs
-SUBTARGETS:=cortexa8 cortexa7 cortexa53 cortexa7v3sspinand
+SUBTARGETS:=cortexa8 cortexa7 cortexa53
 
 KERNEL_PATCHVER:=5.10
 

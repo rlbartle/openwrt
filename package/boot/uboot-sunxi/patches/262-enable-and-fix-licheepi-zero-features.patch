@@ -1,13 +1,16 @@
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
-@@ -623,6 +623,7 @@ dtb-$(CONFIG_MACH_SUN8I_R40) += \
+@@ -623,7 +623,9 @@ dtb-$(CONFIG_MACH_SUN8I_R40) += \
  	sun8i-v40-bananapi-m2-berry.dtb
  dtb-$(CONFIG_MACH_SUN8I_V3S) += \
  	sun8i-s3-pinecube.dtb \
+-	sun8i-v3s-licheepi-zero.dtb
 +	sun8i-v3s-licheepi-zero-spinand.dtb \
- 	sun8i-v3s-licheepi-zero.dtb
++	sun8i-v3s-licheepi-zero.dtb \
++	sun8i-v3s-ax255-media-manager.dtb
  dtb-$(CONFIG_MACH_SUN50I_H5) += \
  	sun50i-h5-bananapi-m2-plus.dtb \
+ 	sun50i-h5-emlid-neutis-n5-devboard.dtb \
 --- a/drivers/clk/sunxi/clk_v3s.c
 +++ b/drivers/clk/sunxi/clk_v3s.c
 @@ -17,16 +17,22 @@ static struct ccu_clk_gate v3s_gates[] =
@@ -106,7 +109,7 @@
 -			default-state = "on";
 +&spi0 {
 +	status = "okay";
-+	flash: spinand@0 {
++	flash: spi-nand@0 {
 +		#address-cells = <1>;
 +		#size-cells = <1>;
 +		compatible = "spi-nand";

@@ -340,8 +340,14 @@ define U-Boot/LicheePi_Zero
   BUILD_DEVICES:=licheepi-zero
 endef
 
+define U-Boot/AX255_MediaManager
+  BUILD_SUBTARGET:=cortexa7
+  NAME:=Axium AX-255 Internal Media Manager
+  BUILD_DEVICES:=ax255-media-manager
+endef
+
 define U-Boot/LicheePi_Zero_SPINAND
-  BUILD_SUBTARGET:=cortexa7v3sspinand
+  BUILD_SUBTARGET:=cortexa7
   NAME:=LicheePi Zero (SPI-NAND)
   BUILD_DEVICES:=licheepi-zero-spinand
 endef
@@ -394,7 +400,8 @@ UBOOT_TARGETS := \
 	orangepi_zero_plus \
 	libretech_all_h3_cc_h5 \
 	LicheePi_Zero \
-	LicheePi_Zero_SPINAND
+	LicheePi_Zero_SPINAND \
+	AX255_MediaManager
 
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 

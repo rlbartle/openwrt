@@ -1,34 +1,33 @@
-if ! TARGET_sunxi_cortexa7v3sspinand
+
+if ! SUN8I_V3S_SPINAND_OPTIONS
 
 config SUNXI_SD_BOOT_PARTSIZE
 	int "Boot (SD Card) filesystem partition size (in MB)"
-	depends on TARGET_sunxi
+	depends on TARGET_sunxi && ! SUN8I_V3S_SPINAND_OPTIONS
 	default 20
 
 endif
 
-if TARGET_sunxi_cortexa7v3sspinand
-
 menuconfig SUN8I_V3S_SPINAND_OPTIONS
 	bool "SPI-NAND options"
-	default y if TARGET_sunxi_cortexa7v3sspinand
+	depends on TARGET_sunxi && TARGET_SUBTARGET = "cortexa7"
+	default n
+
+if SUN8I_V3S_SPINAND_OPTIONS
 
 config SUNXI_SPINAND_PAGESIZE
 	int "SPI-NAND pagesize size"
-	depends on TARGET_sunxi_cortexa7v3sspinand
 	depends on SUN8I_V3S_SPINAND_OPTIONS
 	default 2048
 	range 1024 8192
 
 config SUNXI_SPINAND_BLOCKSIZE
 	int "SPI-NAND block-size (in KiB)"
-	depends on TARGET_sunxi_cortexa7v3sspinand
 	depends on SUN8I_V3S_SPINAND_OPTIONS
 	default 128
 
 config SUN8I_V3S_OFFSET_UBI
 	int "Offset of ubi in the spi-nand"
-	depends on TARGET_sunxi_cortexa7v3sspinand
 	depends on SUN8I_V3S_SPINAND_OPTIONS
 	default 3145728 if SUNXI_SPINAND_PAGESIZE = 2048 && SUN8I_V3S_SPINAND_DUPLICATE_BOOT && SUN8I_V3S_SPINAND_DUPLICATE_BOOT_UBOOT > 2
 	default 2097152 if SUNXI_SPINAND_PAGESIZE = 2048 && SUN8I_V3S_SPINAND_DUPLICATE_BOOT
@@ -40,7 +39,7 @@ config SUN8I_V3S_OFFSET_UBI
 
 menuconfig SUN8I_V3S_SPINAND_DUPLICATE_BOOT
 	bool "Duplicate SPL and u-boot for better fail-safety"
-	depends on TARGET_sunxi_cortexa7v3sspinand
+	depends on SUN8I_V3S_SPINAND_OPTIONS
 	default n
 	help
 	  Copies the SPL multiple times to the different EGON-entrypoints and PEBs.
@@ -70,4 +69,4 @@ config SUN8I_V3S_SPINAND_DUPLICATE_BOOT_UBOOT
 
 endif # SUN8I_V3S_SPINAND_DUPLICATE_BOOT
 
-endif # TARGET_sunxi_cortexa7v3sspinand
+endif # SUN8I_V3S_SPINAND_OPTIONS

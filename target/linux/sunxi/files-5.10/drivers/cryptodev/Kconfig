@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config CRYPTODEV
+	tristate "cryptodev"
+	select CRYPTO_AUTHENC
+	select CRYPTO_HASH
+	default n
+	help
+	  This is the out-of-tree cryptodev driver.
