@@ -11,6 +11,7 @@ endif
 menuconfig SUN8I_V3S_SPINAND_OPTIONS
 	bool "SPI-NAND options"
 	depends on TARGET_sunxi && TARGET_SUBTARGET = "cortexa7"
+	select USES_UBIFS
 	default n
 
 if SUN8I_V3S_SPINAND_OPTIONS
