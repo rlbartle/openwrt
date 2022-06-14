@@ -70,6 +70,7 @@ platform_do_upgrade() {
 	linksys,ea7500-v2|\
 	linksys,ea8100-v1|\
 	linksys,ea8100-v2|\
+	mts,wg430223|\
 	netgear,r6220|\
 	netgear,r6260|\
 	netgear,r6350|\
@@ -84,6 +85,7 @@ platform_do_upgrade() {
 	netis,wf2881|\
 	raisecom,msg1500-x-00|\
 	sercomm,na502|\
+	sercomm,na502s|\
 	xiaomi,mi-router-3g|\
 	xiaomi,mi-router-3-pro|\
 	xiaomi,mi-router-4|\
