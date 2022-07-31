@@ -60,6 +60,9 @@ platform_do_upgrade() {
 	dlink,dir-2640-a1|\
 	dlink,dir-2660-a1|\
 	dlink,dir-853-a3|\
+	h3c,tx1800-plus|\
+	h3c,tx1801-plus|\
+	h3c,tx1806|\
 	hiwifi,hc5962|\
 	iptime,a3004t|\
 	iptime,ax2004m|\
@@ -84,6 +87,7 @@ platform_do_upgrade() {
 	netgear,r7450|\
 	netgear,wac104|\
 	netgear,wac124|\
+	netgear,wax202|\
 	netis,wf2881|\
 	raisecom,msg1500-x-00|\
 	sercomm,na502|\
@@ -95,7 +99,9 @@ platform_do_upgrade() {
 	xiaomi,mi-router-cr6606|\
 	xiaomi,mi-router-cr6608|\
 	xiaomi,mi-router-cr6609|\
-	xiaomi,redmi-router-ac2100)
+	xiaomi,redmi-router-ac2100|\
+	zyxel,nwa50ax|\
+	zyxel,nwa55axe)
 		nand_do_upgrade "$1"
 		;;
 	iodata,wn-ax1167gr2|\
